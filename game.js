@@ -516,6 +516,25 @@ let gridSystem;
 gridSystem = new GridSystem(gridMatrix,14, 23, 13, 11); //Setter start posisjonen til pacman og lager alt du ser og mer
 gridSystem.render();
 
+function sendHighScore() {
+    $("#p1").val(name);
+    $("#p2").val(highscore);
+    $("#p3").val("send");
+    $("#f1").submit();
+}
+
+//Updates the highscore
+function updatehighscore() {
+    if (score > highscore) {
+        highscore = score;
+        localStorage['highscore'] = score
+        hschange = 1;
+        document.getElementById("highscore-output").innerHTML = score;
+    }
+    //console.log(highscore)
+}
+
+
 function gameLoop() { // Tatt fra https://github.com/KristianHelland/worm
     if(gridSystem.matrix[gridSystem.pacman.y][gridSystem.pacman.x] === gridSystem.matrix[gridSystem.blinky.y][gridSystem.blinky.x]) { //Dette skjer når tiden går ut
         //TODO legg til game over screen
