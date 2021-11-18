@@ -1,4 +1,3 @@
-//TODO Leg til en fiende
 class GridSystem { //TODO fortsette
     //TODO kommentere - Kristoffer
     constructor(matrix, pacmanX, pacmanY, blinkyX, blinkyY) { //Lager mange lag som ligger oppå hverandre for å vise siden og definerer disse.
@@ -61,7 +60,7 @@ class GridSystem { //TODO fortsette
         this.matrix[y][x] = val;
     }
 
-    #rotatePacman = ({keyCode}) =>{
+    #rotatePacman = ({keyCode}) =>{ //TODO Leg til pil tastene
         this.play = true;
 
         if (keyCode === 65) { // venstre
