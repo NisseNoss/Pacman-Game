@@ -7,8 +7,8 @@ if ($value=="send")
 
         // Tilkoblingsinformasjon
         $tjener = "51.174.64.25:3306";
-        $brukernavn = "";
-        $passord = "";
+        $brukernavn = "game";
+        $passord = "Passord123";
         $database = "highscore";
 
         // Opprette en kobling
