@@ -13,11 +13,11 @@
 
 
 // Sjekk om koblingen virker
-//if ($kobling->connect_error) {
-//die("Noe gikk galt: " . $kobling->connect_error);
-//}
-// else {
-//echo "Koblingen virker"; }
+if ($kobling->connect_error) {
+die("Noe gikk galt: " . $kobling->connect_error);
+}
+ else {
+echo "Koblingen virker"; }
 
 
  //Angi UTF-8 som tegnsett
