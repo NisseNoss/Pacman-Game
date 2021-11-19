@@ -354,7 +354,7 @@ class GridSystem { //TODO fortsette
     #getCenter(w, h) { // Sentrerer banen etter skjermstørrelse
         return {
             x: window.innerWidth / 2 - w / 2 + "px",
-            y: window.innerHeight / 2 - h / 2 - 20 + "px"
+            y: window.innerHeight / 2 - h / 2 + "px"
         };
     }
 
@@ -362,8 +362,8 @@ class GridSystem { //TODO fortsette
         this.canvas = document.createElement("canvas");
         this.context = this.#getContext()
         //this.context = this.canvas.getContext("2d");
-        this.width = this.canvas.width = w;
-        this.height = this.canvas.height = h;
+        this.canvas.width = w;
+        this.canvas.height = h;
         this.canvas.style.position = "absolute";
         this.canvas.style.background = color;
         if (isTransparent) {
@@ -389,7 +389,7 @@ class GridSystem { //TODO fortsette
         this.outlineContext.canvas.width = w;
         this.outlineContext.canvas.height = h;
 
-        const center = this.#getCenter(w, h); //TODO Finn ut av dette i 17/11
+        const center = this.#getCenter(w, h); //TODO Finn ut av dette i 20/11
         this.outlineContext.canvas.style.marginTop = center.y;
         this.outlineContext.canvas.style.marginLeft = center.x;
 
@@ -518,6 +518,7 @@ let highscore = 0;
 let lives = 3;
 let score = 0; //Setter start score
 let level = 0; //Setter start level
+let hschange = 0;//Used if change is detected
 //let time = 100; //Setter start tiden
 let gridSystem;
 gridSystem = new GridSystem(gridMatrix,14, 23, 13, 11); //Setter start posisjonen til pacman og lager alt du ser og mer
@@ -531,12 +532,11 @@ function sendHighScore() {
 }
 
 //Updates the highscore
-function updatehighscore() {
+function updateHighScore() {
     if (score > highscore) {
         highscore = score;
         localStorage['highscore'] = score
         hschange = 1;
-        document.getElementById("highscore-output").innerHTML = score;
     }
     //console.log(highscore)
 }
@@ -544,6 +544,7 @@ function updatehighscore() {
 
 function gameLoop() { // Tatt fra https://github.com/KristianHelland/worm
     if (gridSystem.play) {
+        updateHighScore();
         gridSystem.movePacman();
         gridSystem.moveBlinky();
         //time = time - 1;
@@ -599,6 +600,9 @@ function gameLoop() { // Tatt fra https://github.com/KristianHelland/worm
             console.log("Game over"); //Logger "game over" i console
             console.log(score); //Logger så scoren i console
             gridSystem.uiUpdate(); //Oppdaterer ui en siste gang
+            if (hschange === 1 && score > 0) {
+                setTimeout(sendHighScore, 3000)
+            }
             return; //Går ut av gameloopen som betyr at spillet stopper
         }
 
@@ -608,13 +612,11 @@ function gameLoop() { // Tatt fra https://github.com/KristianHelland/worm
         gridSystem.render();
 
     }
-    //Hvis "if(time <= 0)" ikke er sann, så kjøres de neste 4 linjer med kode.
     gridSystem.loadCoins(); //Loader inn nye coins
     gridSystem.loadPosition(); //Loader posisjon til pacman på nytt
     gridSystem.uiUpdate(); //Oppdaterer ui
     setTimeout(gameLoop, 1000/gridSystem.FPS); //'1000 millisekund delt på 5fps'- sekunders pause før gameloop kjøres igjen.
 }
-//Dette kjøres etter return skjer fra "if(time <= 0) "
 gameLoop();
-console.log(gridSystem.dotCount);
-console.log(score);
+//console.log(gridSystem.dotCount);
+//console.log(score);

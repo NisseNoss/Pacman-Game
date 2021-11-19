@@ -5,7 +5,7 @@
     <title>Pacman</title>
 </head>
 <body>
-<script src="game.js"></script>
+
 <!--Dont mess with this, it does the name setting thing pls-->
     <div id="nameinput-sec">
         <p>This site uses cookies. By using this site you consent to the storage of information on your device</p>
@@ -40,6 +40,6 @@
 <!-- Jquery import -->
     <script crossorigin="anonymous" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="send.js"></script>
-
+<script src="game.js"></script>
 </body>
 </html>

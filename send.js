@@ -6,8 +6,8 @@ let name = localStorage['name'] || false;
 function sendhighscore() {
     $("#p1").val(name);
     $("#p2").val(highscore);
-    $("#p3").val("send")
-    $("#f1").submit()
+    $("#p3").val("send");
+    $("#f1").submit();
     //document.querySelector('#p1').value = name;
     //document.querySelector('#p2').value = highscore;
     //document.querySelector("#f1").submit();
@@ -25,6 +25,6 @@ function namesubmit() {
 
 //Removes input if name saved
 if (name) {
-    console.log("To remove name, type localStorage.clear();")
-    document.querySelector("#nameinput-sec").remove()
+    console.log("To remove name, type localStorage.clear();");
+    document.querySelector("#nameinput-sec").remove();
 }
